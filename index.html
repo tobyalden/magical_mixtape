@@ -42,6 +42,22 @@
         right: 0;
         z-index: -1;
       }
+      #skip {
+        top: 0px;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        opacity: 0;
+        transition: opacity .15s ease-in-out;
+        -moz-transition: opacity .15s ease-in-out;
+        -webkit-transition: opacity .15s ease-in-out;
+      }
+      #skip:hover {
+        opacity: 1;
+      }
       #player {
         top: 0px;
         position: absolute;
@@ -53,7 +69,7 @@
       }
       .link-container {
         color: white;
-        margin-top: 320px;
+        margin-top: 315px;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
@@ -66,9 +82,11 @@
   </head>
   <body>
     <img id='frame' src="images/frame.png" alt="An ornate frame." />
+    <img id='skip' src="images/skip.png" alt="A button to skip to the next song." />
     <div id="player"></div><br>
     <div class="link-container">
-      <a id="link">MAGICAL MIXTAPE</a>
+      <a id="song-link">MAGICAL</a><br>
+      <a id="album-link" target="_blank">MIXTAPE</a>
     </div>
   </body>
 </html>

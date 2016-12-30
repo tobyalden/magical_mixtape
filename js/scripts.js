@@ -47,6 +47,8 @@
       idRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/
       id = video.uri.match(idRegex)[1];
       player.loadVideoById(id);
+      $("#album-link").text(responseJSON.data.title);
+      $("#album-link").attr("href", responseJSON.data.uri);
     }
     else {
       nextVideo();
@@ -61,10 +63,8 @@
   }
 
   $(document).ready(function() {
-      $(window).keypress(function (e) {
-      if (e.keyCode === 0 || e.keyCode === 32) {
+      $("#skip").click(function (e) {
         e.preventDefault()
         nextVideo();
-      }
     })
   });
