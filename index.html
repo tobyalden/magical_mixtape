@@ -88,11 +88,20 @@
         z-index: 0;
         font-family: monospace;
       }
+      .liked-container {
+        font-size: 10px;
+        color: white;
+        font-family: monospace;
+        position: absolute;
+      }
     </style>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/scripts.js"></script>
   </head>
   <body>
+    <div class="liked-container">
+      <ul id="liked"></ul>
+    </div>
     <img id='tape' src="images/tape.gif" alt="A cassette tape." />
     <img id='frame' src="images/frame.png" alt="An ornate frame." />
     <img id='skip' src="images/skip.png" alt="A button to skip to the next song." />

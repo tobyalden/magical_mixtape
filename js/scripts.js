@@ -8,6 +8,8 @@
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+  var liked = [];
+
   var player;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
@@ -86,13 +88,56 @@
 
   $(document).ready(function() {
       tapeLoopSfx.play();
+      getLikes();
       $("#skip").click(function (e) {
         e.preventDefault()
         tapeButtonSfx.play();
         bufferMode();
         nextVideo();
     })
+    $(document).keypress(function (e) {
+      if(e.key == "l" || e.key == "L") {
+        songName = $("#song-link").text();
+        if(songName.length > 40) {
+          songName = songName.substring(0, 37) + "...";
+        }
+        like = {
+          song: songName,
+          songLink: $("#song-link").attr("href"),
+          album: $("#album-link").text(),
+          albumLink: $("#album-link").attr("href")
+        }
+        inList = false;
+        for(var i = 0; i < liked.length; i++) {
+          if(liked[i].songLink == like.songLink) {
+            inList = true;
+          }
+        }
+        if(!inList) {
+          liked.push(like);
+          updateLikes();
+        }
+      }
+    })
   });
+
+  function getLikes() {
+    storedLiked = localStorage.getItem("magicalMixtapeLiked", liked);
+    // debugger; 
+    if(storedLiked != undefined) {
+      liked = JSON.parse(storedLiked);
+    }
+    updateLikes();
+  }
+
+  function updateLikes() {
+    html = ""
+    for(var i = 0; i < liked.length; i++) {
+      html += "<li><a href='" + liked[i].songLink + "' target='_blank'>" + liked[i].song + "</a></li>";
+    }
+    $("#liked").html(html);
+    localStorage.setItem("magicalMixtapeLiked", JSON.stringify(liked));
+  }
 
   function playMode() {
     $("#skip").show();
