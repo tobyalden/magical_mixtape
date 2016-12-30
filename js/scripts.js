@@ -90,11 +90,16 @@
       tapeLoopSfx.play();
       getLikes();
       $("#skip").click(function (e) {
-        e.preventDefault()
-        tapeButtonSfx.play();
-        bufferMode();
-        nextVideo();
-    })
+          e.preventDefault();
+          tapeButtonSfx.play();
+          bufferMode();
+          nextVideo();
+      })
+      $("body").on("click", ".remove", function (e) {
+          e.preventDefault();
+          liked.splice(parseInt(e.target.id), 1);
+          updateLikes();
+      });
     $(document).keypress(function (e) {
       if(e.key == "l" || e.key == "L") {
         songName = $("#song-link").text();
@@ -102,6 +107,7 @@
           songName = songName.substring(0, 37) + "...";
         }
         like = {
+          id: liked.length,
           song: songName,
           songLink: $("#song-link").attr("href"),
           album: $("#album-link").text(),
@@ -123,7 +129,7 @@
 
   function getLikes() {
     storedLiked = localStorage.getItem("magicalMixtapeLiked", liked);
-    // debugger; 
+    // debugger;
     if(storedLiked != undefined) {
       liked = JSON.parse(storedLiked);
     }
@@ -133,7 +139,7 @@
   function updateLikes() {
     html = ""
     for(var i = 0; i < liked.length; i++) {
-      html += "<li><a href='" + liked[i].songLink + "' target='_blank'>" + liked[i].song + "</a></li>";
+      html += "<li>[<a id='" + i + "' class='remove'>X</a>] <a href='" + liked[i].songLink + "' target='_blank'>" + liked[i].song + "</a></li>";
     }
     $("#liked").html(html);
     localStorage.setItem("magicalMixtapeLiked", JSON.stringify(liked));
