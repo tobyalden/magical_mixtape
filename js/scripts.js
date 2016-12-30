@@ -10,6 +10,14 @@
       height: '390',
       width: '640',
       videoId: 'yy7dIhzyiag',
+      playerVars: {
+        'showinfo': 0,
+        'controls': 0,
+        'disablekb': 0,
+        'rel': 0,
+        'showinfo': 0,
+        'modestbranding': 1
+      },
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange,
@@ -53,7 +61,10 @@
   }
 
   $(document).ready(function() {
-      $("#next").click(function() {
+      $(window).keypress(function (e) {
+      if (e.keyCode === 0 || e.keyCode === 32) {
+        e.preventDefault()
         nextVideo();
-      });
+      }
+    })
   });

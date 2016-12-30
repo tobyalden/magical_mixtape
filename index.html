@@ -2,12 +2,73 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>SpindleHole</title>
+    <title>MAGICAL MIXTAPE</title>
+    <style media="screen">
+      body {
+        background-repeat: repeat;
+        background-image: url("images/background.png");
+        /*background-size: cover;*/
+        background-repeat:repeat;
+      }
+      h3 {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      .about {
+        color: white;
+        font-size: small;
+        position:absolute;
+        right:5px;
+        bottom:5px;
+      }
+      a:link {
+          color: white;
+          text-decoration:none;
+      }
+      a:visited {
+          color: white;
+      }
+      a:hover {
+          color: hotpink;
+      }
+      #frame {
+        top: 0px;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        z-index: -1;
+      }
+      #player {
+        top: 0px;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        z-index: -2;
+      }
+      .link-container {
+        color: white;
+        margin-top: 320px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        z-index: 0;
+        font-family: monospace;
+      }
+    </style>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/scripts.js"></script>
   </head>
   <body>
+    <img id='frame' src="images/frame.png" alt="An ornate frame." />
     <div id="player"></div><br>
-    <button id="next">Next Song</button>
+    <div class="link-container">
+      <a id="link">MAGICAL MIXTAPE</a>
+    </div>
   </body>
 </html>
