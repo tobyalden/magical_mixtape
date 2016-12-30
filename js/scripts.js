@@ -1,4 +1,8 @@
   var tag = document.createElement('script');
+  var tapeButtonSfx = new Audio("sfx/tapebutton.wav");
+  var tapeOffSfx = new Audio("sfx/tapeoff.wav");
+  var tapeLoopSfx = new Audio("sfx/tapeloop.wav");
+  tapeLoopSfx.loop = true;
 
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -31,6 +35,7 @@
   }
 
   function nextVideo() {
+    player.pauseVideo();
     url = "https://api.discogs.com/masters/" + Math.floor(Math.random() * 1110000);
     $.ajax({
         type: "GET",
@@ -47,7 +52,17 @@
       idRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/
       id = video.uri.match(idRegex)[1];
       player.loadVideoById(id);
-      $("#album-link").text(responseJSON.data.title);
+      songTitle = video.title;
+      if(songTitle.length > 58) {
+        songTitle = songTitle.substring(0, 55) + "...";
+      }
+      albumTitle = responseJSON.data.title;
+      if(albumTitle.length > 58) {
+        albumTitle = albumTitle.substring(0, 55) + "...";
+      }
+      $("#song-link").text(songTitle);
+      $("#song-link").attr("href", video.uri);
+      $("#album-link").text(albumTitle);
       $("#album-link").attr("href", responseJSON.data.uri);
     }
     else {
@@ -57,14 +72,36 @@
 
   var done = false;
   function onPlayerStateChange(event) {
+    if(event.data == YT.PlayerState.PLAYING) {
+      playMode();
+      tapeOffSfx.play();
+    }
+    else {
+      bufferMode();
+    }
     if (event.data == YT.PlayerState.ENDED) {
       nextVideo();
     }
   }
 
   $(document).ready(function() {
+      tapeLoopSfx.play();
       $("#skip").click(function (e) {
         e.preventDefault()
+        tapeButtonSfx.play();
+        bufferMode();
         nextVideo();
     })
   });
+
+  function playMode() {
+    $("#skip").show();
+    $("#tape").hide();
+    tapeLoopSfx.pause();
+  }
+
+  function bufferMode() {
+    $("#skip").hide();
+    $("#tape").show();
+    tapeLoopSfx.play();
+  }
