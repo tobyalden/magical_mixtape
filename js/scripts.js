@@ -1,7 +1,7 @@
   var tag = document.createElement('script');
   var tapeButtonSfx = new Audio("sfx/tapebutton.wav");
   var tapeOffSfx = new Audio("sfx/tapeoff.wav");
-  var tapeLoopSfx = new Audio("sfx/tapeloop.wav");
+  var tapeLoopSfx = new Audio("sfx/tapeloop.mp3");
   tapeLoopSfx.loop = true;
 
   tag.src = "https://www.youtube.com/iframe_api";
