@@ -52,6 +52,7 @@
         left: 0;
         right: 0;
         z-index: -1;
+        pointer-events: none;
       }
       #skip {
         display: none;
@@ -77,11 +78,12 @@
         margin-right: auto;
         left: 0;
         right: 0;
-        z-index: -3;
+        z-index: -888;
+        -webkit-transform-style: preserve-3d;
       }
       .link-container {
         color: white;
-        margin-top: 315px;
+        padding-top: 315px;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
@@ -107,10 +109,10 @@
       <h3>PRESS L TO SAVE SONGS</h3>
       <ul id="liked"></ul>
     </div>
-    <img id='tape' src="images/tape.gif" alt="A cassette tape." />
     <img id='frame' src="images/frame.png" alt="An ornate frame." />
-    <img id='skip' src="images/skip.png" alt="A button to skip to the next song." />
+    <img id='tape' src="images/tape.gif" alt="A cassette tape." />
     <div id="player"></div><br>
+    <img id='skip' src="images/skip.png" alt="A button to skip to the next song." />
     <div class="link-container">
       <a id="song-link" target="_blank">MAGICAL</a><br>
       <a id="album-link" target="_blank">MIXTAPE</a>
